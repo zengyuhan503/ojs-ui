@@ -1,0 +1,31 @@
+html,
+body,
+div,
+ul,
+li,
+p {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li,
+ol {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  /* 去除下划线 */
+  color: inherit;
+  /* 继承父元素的颜色 */
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
