@@ -4,12 +4,12 @@ const isInputs = ref(false)
 const isShowSearch = ref(false)
 const searchVal = ref('')
 
-
 function handleEsc(event) {
     if (event.key === 'Escape' && isShowSearch.value) {
         isShowSearch.value = false;
     }
 }
+
 const clearInput = () => {
     searchVal.value = ''
 }
@@ -64,9 +64,9 @@ onUnmounted(() => {
                                     Policies <icon-down :size="20" />
                                 </span>
                                 <template #content>
-                                    <a-doption>Option 1</a-doption>
-                                    <a-doption>Option 2</a-doption>
-                                    <a-doption>Option 3</a-doption>
+                                    <a-doption>Option OptionOptionOption1</a-doption>
+                                    <a-doption>Option OptionOptionOption 2</a-doption>
+                                    <a-doption>Option OptionOptionOption 3</a-doption>
                                 </template>
                             </a-dropdown>
                         </li>
@@ -165,9 +165,14 @@ onUnmounted(() => {
 
     .logo {
         width: 65px;
+        height: 65px;
+        position: relative;
 
         img {
-            width: 100%;
+            width: 102px;
+            height: 102px;
+            position: relative;
+            top: -18px;
         }
     }
 

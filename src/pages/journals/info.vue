@@ -13,7 +13,7 @@
                             articles (Original
                             research, Review, Short communication, Technical reports) to cover cutting-edge science,
                             engineering, and
-                            technology about biomaterials and polymers synthesis, processing, and development.  Read
+                            technology about biomaterials and polymers synthesis, processing, and development. Read
                             More...
                         </p>
                         <img src="../../assets/image/journal_info_img.png" class="cover" alt="">
@@ -138,6 +138,59 @@
                             </p>
                             <div class="items">
                                 <a-row :gutter="24">
+                                    <a-col :span="24">
+                                        <div class="item">
+                                            <a-row :gutter="50">
+                                                <a-col :span="6">
+                                                    <img src="../../assets/image/journals-list-img.png" alt="">
+                                                </a-col>
+                                                <a-col :span="18">
+                                                    <p class="title">
+                                                        Our <span>
+                                                            Title
+                                                        </span>
+                                                    </p>
+                                                    <p class="desc">
+                                                        EurAsia Academic Publishing Group (EAPG) is an independent
+                                                        International
+                                                        publisher that <br>
+                                                        publishes online, <br>
+                                                        peer-reviewed journals covering a wide range of academic
+                                                        disciplines.
+                                                        EAPG follows strict
+                                                        publication ethics <br>
+                                                        published by COPE. All the articles published under the EAPG
+                                                        provide
+                                                        copyrights to the author
+                                                        providing<br>
+                                                        EurAsia Academic Publishing Group (EAPG) is an independent
+                                                        International
+                                                        publisher that <br>
+                                                        publishes online, <br>
+                                                        peer-reviewed journals covering a wide range of academic
+                                                        disciplines.
+                                                        EAPG follows strict
+                                                        publication ethics <br>
+                                                        published by COPE. All the articles published under the EAPG
+                                                        provide
+                                                        copyrights to the author
+                                                        providing<br>
+                                                    </p>
+
+                                                    <div class="datas">
+                                                        <img src="../../assets/image/calendar.png" alt="">
+                                                        <span>20-11-2022</span>
+                                                        <a-divider direction="vertical" />
+                                                        <img src="../../assets/image/eye.png" alt="">
+                                                        <span>196</span>
+                                                        <a-divider direction="vertical" />
+                                                        <img src="../../assets/image/dow.png" alt="">
+                                                        <span>2248 Downloads</span>
+                                                    </div>
+                                                </a-col>
+                                            </a-row>
+                                        </div>
+                                    </a-col>
                                     <a-col :span="12">
                                         <img src="../../assets/image/journals-img2.png" alt="">
                                     </a-col>
@@ -361,6 +414,49 @@
                     width: 100%;
                     border-radius: 20px;
                     margin-bottom: 24px;
+                }
+
+                .item {
+                    margin-bottom: 48px;
+                    padding-bottom: 15px;
+                    border-bottom: 1px solid #344054;
+
+                    img {
+                        width: 100%;
+                        border-radius: 20px;
+                        cursor: pointer;
+                    }
+
+                    .title {
+                        font-size: 25px;
+                        border-bottom: 1px solid #344054;
+                    }
+
+                    .desc {
+                        font-size: 14px;
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+                        padding-bottom: 14px;
+                    }
+
+                    .datas {
+                        margin-top: 14px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding-left: 35%;
+
+                        img {
+                            width: 24px;
+                            margin-bottom: 0;
+                        }
+
+                        span {
+                            font-size: 12px;
+                            line-height: 24px;
+                            color: #666666;
+                            font-weight: 500;
+                        }
+                    }
                 }
             }
 

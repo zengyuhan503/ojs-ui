@@ -6,24 +6,33 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  resolve:{
-    alias:[
+  resolve: {
+    alias: [
       {
         find: '@',
         replacement: path.resolve(__dirname, "src")
       },
       {
-        find:"@assets",
+        find: "@assets",
         replacement: path.resolve(__dirname, "src/assets")
       },
       {
-        find:"@comments",
+        find: "@comments",
         replacement: path.resolve(__dirname, "src/components")
+      },
+      {
+        find: "@pages",
+        replacement: path.resolve(__dirname, "src/pages")
+      },
+      {
+        find: "@utils",
+        replacement: path.resolve(__dirname, "src/utils")
+
       }
     ]
   },
-  server:{
+  server: {
     port: 3000,
-    host:true
+    host: true
   }
 })

@@ -1,9 +1,65 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Banner from '@comments/banner.vue'
-import HomeVideo from '@comments/homeVideo.vue';
+// import HomeVideo from '@comments/homeVideo.vue';
+import UseCookieBanners from '@comments/cookieBanner.vue'
 
 const videoElement = ref(null);
+
+const journalItemActive = ref(1);
+const journalsItems = ref([
+    {
+        name: "BIOSIS",
+        content: `
+          5  Biological Systems is an international fully peer-reviewed and
+            Committee on Publication Ethics (COPE) compliant open access Journal that is published
+            online with a quarterly frequency. The goal of this journal...
+        `
+    },
+    {
+        name: "NANOFABRICATION",
+        content: `
+          4  Biological Systems is an international fully peer-reviewed and
+            Committee on Publication Ethics (COPE) compliant open access Journal that is published
+            online with a quarterly frequency. The goal of this journal...
+        `
+    },
+    {
+        name: "IJS",
+        content: `
+          3  Biological Systems is an international fully peer-reviewed and
+            Committee on Publication Ethics (COPE) compliant open access Journal that is published
+            online with a quarterly frequency. The goal of this journal...
+        `
+    },
+    {
+        name: "BPH",
+        content: `
+          2  Biological Systems is an international fully peer-reviewed and
+            Committee on Publication Ethics (COPE) compliant open access Journal that is published
+            online with a quarterly frequency. The goal of this journal...
+        `
+    },
+    {
+        name: "Human Brain",
+        content: `
+           1 Biological Systems is an international fully peer-reviewed and
+            Committee on Publication Ethics (COPE) compliant open access Journal that is published
+            online with a quarterly frequency. The goal of this journal...
+        `
+    },
+])
+const hoverItem = (index) => {
+    if (index == journalItemActive.value) return false
+    journalItemActive.value = index
+}
+
+const cookiesRef = ref(null)
+const cookieRes = (type) => {
+    localStorage.setItem('isUseCookies', type);
+    showCookieBanners.value = false
+}
+const showCookieBanners = ref(false);
 
 onMounted(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -14,15 +70,18 @@ onMounted(() => {
             }
         });
     });
+    let isUseCookies = localStorage.getItem('isUseCookies');
+    console.log(isUseCookies)
+    if (!isUseCookies || isUseCookies == null) {
+        showCookieBanners.value = true
+    }
 })
-
 
 </script>
 <template>
     <Banner />
     <div class="page-main">
         <div class="home-video-box">
-            <HomeVideo ref="videoElement" />
             <div class="home-video-text">
                 <p class="title">Unfold Your <span>Research, Equally</span> And Globally!</p>
                 <p class="content">EurAsia Academic Publishing Group – a genuine meeting between east and west – unfolds
@@ -87,22 +146,19 @@ onMounted(() => {
                         Our <span>Journals</span>
                     </p>
                     <div class="btns">
-                        <div class="active">BIOSIS</div>
-                        <div>NANOFABRICATION</div>
-                        <div>IJS</div>
-                        <div>BPH</div>
-                        <div>Human Brain</div>
+                        <div :class="{ active: journalItemActive === i }" @mouseover="hoverItem(i)"
+                            v-for="(item, i) in journalsItems" :key="i">
+                            {{ item.name }}
+                        </div>
                     </div>
                 </div>
                 <div class="main">
                     <div class="info">
                         <p class="title">
-                            Biosis
+                            {{ journalsItems[journalItemActive].name }}
                         </p>
                         <p class="desc">
-                            Biological Systems is an international fully peer-reviewed and
-                            Committee on Publication Ethics (COPE) compliant open access Journal that is published
-                            online with a quarterly frequency. The goal of this journal...
+                            {{ journalsItems[journalItemActive].content }}
                         </p>
                         <div class="btns">
                             <a href="">View Journal</a>
@@ -292,7 +348,7 @@ onMounted(() => {
                     </div>
                 </div>
                 <div class="sign">
-                    Sign Up
+                    Join Maiiling List
                 </div>
             </div>
         </div>
@@ -302,6 +358,7 @@ onMounted(() => {
             </div>
         </div>
     </div>
+    <UseCookieBanners v-if="showCookieBanners" ref='cookiesRef' @cookieRes="cookieRes" />
 </template>
 <style lang="less" scoped>
 @import url('./style.less');

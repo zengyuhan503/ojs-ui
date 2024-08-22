@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination } from 'swiper/modules';
@@ -19,7 +19,9 @@ const onSlideChange = () => {
             @slideChange="onSlideChange">
             <swiper-slide>
                 <div class="page-banner-jpg">
-                    <img src="../assets/image/home_banner.png" alt="">
+                    <!-- <img src="../assets/image/home_banner.png" alt=""> -->
+                    <video ref="videoElement" autoplay loop muted preload="auto"
+                        poster="../assets/image/home_banner.png" src="../assets/media/home_video.mp4"></video>
                 </div>
                 <div class="page-banner-text">
                     <div class="content">
@@ -41,19 +43,33 @@ const onSlideChange = () => {
             </swiper-slide>
             <swiper-slide>
                 <div class="page-banner-jpg">
-                    <img src="../assets/image/home_banner.png" alt="">
+                    <!-- <img src="../assets/image/home_banner.png" alt=""> -->
+                    <video ref="videoElement" autoplay loop muted preload="auto"
+                        poster="../assets/image/home_banner.png" src="../assets/media/home_video.mp4"></video>
                 </div>
                 <div class="page-banner-text">
                     <div class="content">
                         <p class="title">
-                            EurAsia and Shanghai University working <br> cooperative to host International Journal of
-                            Sino-Western
-                            Studies (IJS)
+                            Unfold Your <span>Research, Equally</span> And Globally!
                         </p>
                         <p class="desc">
-                            EurAsia and Prof Huang working together to host and index IJSWS in the ESCI and Scopus
-                            database.
+                            EurAsia Academic Publishing Group – a genuine meeting between east and west – unfolds
+                            quality research equally and globally. <br>
+                            EurAsia Academic Publishing Group (EAPG) is an independent International publisher that
+                            publishes
+                            online, peer-reviewed journals covering a wide range of academic disciplines. <br>
+                            EAPG follows
+                            strict
+                            publication ethics published by COPE. All the articles published under the EAPG provide
+                            copyrights
+                            to the author providing their research high visibility and impact. Their articles are provided
+                            with  unique <br>
+                            Digital Object Identifier (DOI) that allows author, readers to identify the paper with no
+                            difficulty.
                         </p>
+                        <div class="btns">
+                            Read More
+                        </div>
                     </div>
                 </div>
             </swiper-slide>
@@ -70,6 +86,10 @@ const onSlideChange = () => {
         width: 100%;
 
         img {
+            width: 100%;
+        }
+
+        video {
             width: 100%;
         }
     }
@@ -95,6 +115,10 @@ const onSlideChange = () => {
                 padding-bottom: 17px;
                 border-bottom: 1px solid #FFFFFF;
                 font-family: 'Montserrat', sans-serif !important;
+
+                span {
+                    color: #E8705A;
+                }
             }
 
             .desc {

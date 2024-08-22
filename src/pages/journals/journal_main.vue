@@ -62,7 +62,7 @@
                                 <p class="desc">
                                     Please submit proposals for special issues via email directly to the Editors.
                                     Submissions should include full contact details, a title, and a Call for Papers
-                                    and/or a Table of Contents, as well as a production schedule.  All the works
+                                    and/or a Table of Contents, as well as a production schedule. All the works
                                     submitted, in English or in Portuguese, are subjected to initial appraisal by the
                                     editors and, if found suitable for further consideration, to double blind peer
                                     review by independent expert referees. For more information on the journal, the
