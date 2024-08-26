@@ -1,8 +1,50 @@
+<script setup>
+import { ref } from 'vue'
+let form = ref({
+
+})
+</script>
 <template>
     <div class="page-archives">
         <a-row :gutter="24">
             <a-col flex="855px" class="grid-demo">
                 <div class="archives">
+                    <div class="searchs">
+                        <a-form :model="form" layout="vertical">
+                                    <a-row :gutter="16">
+                                        <a-col :span="6">
+                                            <a-form-item field="value1" label="Keyword" label-col-flex="100px">
+                                                <a-input v-model="form.value1" placeholder="please enter" />
+                                            </a-form-item>
+                                        </a-col>
+                                        <a-col :span="6">
+                                            <a-form-item field="value2" label="Contact way" label-col-flex="80px">
+                                                <a-input v-model="form.value2" placeholder="please enter" />
+                                            </a-form-item>
+                                        </a-col>
+                                        <a-col :span="6">
+                                            <a-form-item field="value3" label="Journal" label-col-flex="80px">
+                                                <a-select :style="{ width: '100%' }" placeholder="Please select">
+                                                    <a-option>Beijing</a-option>
+                                                    <a-option>Shanghai</a-option>
+                                                    <a-option>Guangzhou</a-option>
+                                                    <a-option disabled>Disabled</a-option>
+                                                </a-select>
+                                            </a-form-item>
+                                        </a-col>
+                                        <a-col :span="6">
+                                            <a-form-item field="value3" label="Article Type" label-col-flex="80px">
+                                                <a-select :style="{ width: '100%' }" placeholder="Please select">
+                                                    <a-option>Beijing</a-option>
+                                                    <a-option>Shanghai</a-option>
+                                                    <a-option>Guangzhou</a-option>
+                                                    <a-option disabled>Disabled</a-option>
+                                                </a-select>
+                                            </a-form-item>
+                                        </a-col>
+                                    </a-row>
+                                </a-form>
+                    </div>
                     <div class="breadcrumb">
                         <a href="">Home</a> > <a href="">Archives </a> >Vol. 1 No. 4 (2022): Biomaterials and Polymers
                         Horizon
@@ -12,6 +54,78 @@
                         orange
                         dye: A review
                     </p>
+                    <div class="banners">
+                        <a-carousel :style="{
+                            width: '100%',
+                            height: '340px',
+                        }" :default-current="2" >
+                            <a-carousel-item>
+                                <img src="../../assets/image/home_banner.png" :style="{
+                                    width: '100%',
+                                }" />
+                            </a-carousel-item>
+                            <a-carousel-item>
+                                <img src="../../assets/image/home_banner.png" :style="{
+                                    width: '100%',
+                                }" />
+                            </a-carousel-item>
+                            <a-carousel-item>
+                                <img src="../../assets/image/home_banner.png" :style="{
+                                    width: '100%',
+                                }" />
+                            </a-carousel-item>
+                            <a-carousel-item>
+                                <img src="../../assets/image/home_banner.png" :style="{
+                                    width: '100%',
+                                }" />
+                            </a-carousel-item>
+                        </a-carousel>
+                    </div>
+                    <div class="acoustics">
+                        <p class="title">
+                            Acoustics
+                        </p>
+                        <p>
+                            Acoustics is an international, peer-reviewed, open access journal on acoustics science and
+                            engineering, published quarterly online by MDPI.
+                        </p>
+                        <ul>
+                            <li>
+                                <a href=""> Open Access</a> — free for readers, with article processing charges (APC)
+                                paid by authors or their institutions.
+                            </li>
+                            <li>
+                                <a href=""> High Visibility</a> — indexed within ESCI (Web of Science), Scopus, and
+                                other databases.
+                            </li>
+                            <li>
+                                <a href=""> Open Access</a> — free for readers, with article processing charges (APC)
+                                paid by authors or their institutions.
+                            </li>
+                        </ul>
+                        <div class="impact">
+                            <span>
+                                Impact Factor:
+                            </span> 1.3 (2023); 5-Year Impact Factor: 1.9 (2023)
+                        </div>
+                        <div class="datas">
+                            <span>
+                                <icon-sort /> Imprint Information
+                            </span>
+                            <a-divider direction="vertical" />
+                            <span>
+                                <icon-download /> Journal Flyer
+                            </span>
+                            <a-divider direction="vertical" />
+                            <span>
+                                <icon-lock /> Open Access
+                            </span>
+                            <a-divider direction="vertical" />
+                            <span>
+                                ISSN: 2624-599X
+                            </span>
+                        </div>
+                    </div>
                     <div class="labels">
                         <a href="" class="active"> Article </a>
                         <a href=""> References </a>
@@ -66,6 +180,22 @@
                     </div>
                     <div class="details">
                         <div class="detail">
+                            <p class="title">E-Mail <span> Alert </span></p>
+                            <p class="desc">
+                                Add your e-mail address to receive forthcoming issues of this journal:
+                            </p>
+                            <div style="margin: 20px 0;">
+                                <a-input :style="{ width: '100%' }" placeholder="Please enter Email" allow-clear>
+                                    <template #prepend>
+                                        Email
+                                    </template>
+                                </a-input>
+                                <div style="margin: 10px 0;text-align: center;">
+                                    <a-button style="width: 100%;">subscribe</a-button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail">
                             <p class="title">Article <span>Details </span></p>
                             <p class="desc">
                                 DOI: <br>
@@ -114,6 +244,10 @@
     margin: auto;
     padding: 80px 0;
 
+    .searchs {
+        margin-bottom: 40px;
+    }
+
     .breadcrumb {
         height: 57px;
         line-height: 57px;
@@ -121,6 +255,60 @@
         a {
             display: inline-block;
             color: #101828;
+        }
+    }
+
+    .banners {
+        margin-top: 50px;
+    }
+
+    .acoustics {
+        margin-bottom: 40px;
+        padding: 20px 0;
+        border-bottom: 1px solid #ECECECE5;
+
+        &>p.title {
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 30px;
+            color: #1F3C8A;
+            line-height: 60px;
+            margin-top: 12px;
+        }
+
+        .desc {
+            margin-top: 12px;
+            font-size: 14px;
+            line-height: 21px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 10px;
+
+            li {
+                list-style-type: disc;
+                line-height: 27px;
+
+                a {
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .impact {
+            margin: 20px 0;
+            font-size: 14px;
+            line-height: 21px;
+
+            span {
+                font-weight: 600;
+            }
+        }
+
+        .datas {
+            margin: 20px 0;
+            font-size: 14px;
         }
     }
 
