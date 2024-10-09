@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { banners } from '../api/list.js'
 
 const modules = ref([Pagination])
 const onSwiper = (swiper) => {
@@ -12,27 +13,35 @@ const onSwiper = (swiper) => {
 const onSlideChange = () => {
     console.log('slide change');
 };
+
+let banner_list = ref([])
+const getBanners = () => {
+    banners.list().then(res => {
+        banner_list.value = res.data.data;
+        console.log(banner_list.value)
+    })
+}
+onMounted(() => {
+    getBanners()
+})
 </script>
 <template>
     <div class="page-banner">
         <swiper :slides-per-view="1" :pagination="true" :modules="modules" :space-between="0" @swiper="onSwiper"
             @slideChange="onSlideChange">
-            <swiper-slide>
+            <swiper-slide v-for="(item, index) in banner_list" :key="index">
                 <div class="page-banner-jpg">
                     <!-- <img src="../assets/image/home_banner.png" alt=""> -->
                     <video ref="videoElement" autoplay loop muted preload="auto"
-                        poster="../assets/image/home_banner.png" src="../assets/media/home_video.mp4"></video>
+                        :poster="item.cover" :src="item.source"></video>
                 </div>
                 <div class="page-banner-text">
                     <div class="content">
                         <p class="title">
-                            EurAsia and Shanghai University working <br> cooperative to host International Journal of
-                            Sino-Western
-                            Studies (IJS)
+                            {{ item.title }}
                         </p>
                         <p class="desc">
-                            EurAsia and Prof Huang working together to host and index IJSWS in the ESCI and Scopus
-                            database.
+                            {{item.dsp}}
                         </p>
                         <div class="btns">
                             Read More
@@ -40,38 +49,6 @@ const onSlideChange = () => {
                     </div>
                 </div>
 
-            </swiper-slide>
-            <swiper-slide>
-                <div class="page-banner-jpg">
-                    <!-- <img src="../assets/image/home_banner.png" alt=""> -->
-                    <video ref="videoElement" autoplay loop muted preload="auto"
-                        poster="../assets/image/home_banner.png" src="../assets/media/home_video.mp4"></video>
-                </div>
-                <div class="page-banner-text">
-                    <div class="content">
-                        <p class="title">
-                            Unfold Your <span>Research, Equally</span> And Globally!
-                        </p>
-                        <p class="desc">
-                            EurAsia Academic Publishing Group – a genuine meeting between east and west – unfolds
-                            quality research equally and globally. <br>
-                            EurAsia Academic Publishing Group (EAPG) is an independent International publisher that
-                            publishes
-                            online, peer-reviewed journals covering a wide range of academic disciplines. <br>
-                            EAPG follows
-                            strict
-                            publication ethics published by COPE. All the articles published under the EAPG provide
-                            copyrights
-                            to the author providing their research high visibility and impact. Their articles are provided
-                            with  unique <br>
-                            Digital Object Identifier (DOI) that allows author, readers to identify the paper with no
-                            difficulty.
-                        </p>
-                        <div class="btns">
-                            Read More
-                        </div>
-                    </div>
-                </div>
             </swiper-slide>
         </swiper>
 
