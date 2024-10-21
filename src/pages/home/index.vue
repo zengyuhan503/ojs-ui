@@ -96,7 +96,7 @@ onMounted(() => {
 <template>
   <Banner />
   <div class="page-main">
-    <div class="home-video-box">
+    <!-- <div class="home-video-box">
       <div class="home-video-text">
         <p class="title">Unfold Your <span>Research, Equally</span> And Globally!</p>
         <p class="content">
@@ -104,8 +104,25 @@ onMounted(() => {
         </p>
         <div class="btns">Read More</div>
       </div>
-    </div>
+    </div> -->
 
+    <div class="home-video-box">
+      <div class="home-video-text">
+        <p class="title">Unfold Your <span>Research, Equally</span> And Globally!</p>
+        <p class="content">
+          EurAsia Academic Publishing Group – a genuine meeting between east and west –
+          unfolds quality research equally and globally. EurAsia Academic Publishing Group
+          (EAPG) is an independent International publisher that publishes online,
+          peer-reviewed journals covering a wide range of academic disciplines. EAPG
+          follows strict publication ethics published by COPE. All the articles published
+          under the EAPG provide copyrights to the author providing their research high
+          visibility and impact. Their articles are provided with unique Digital Object
+          Identifier (DOI) that allows author, readers to identify the paper with no
+          difficulty.
+        </p>
+        <div class="btns">Read More</div>
+      </div>
+    </div>
     <div class="home-mission">
       <div>
         <div class="left-text">
