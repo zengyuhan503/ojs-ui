@@ -36,10 +36,10 @@ export default defineConfig({
     host: true,
     proxy: {
       // 当遇到 /api 前缀的请求时会触发代理
-      '/api_list': {
-        target: 'http://47.239.26.67', // 目标服务器
+      '/api': {
+        target: 'https://ojs.cdwuhu.com/', // 目标服务器
         changeOrigin: true, // 是否改变请求源，这是跨域的关键
-        rewrite: path => path.replace(/^\/api_list/, ''), // 将路径中的 `/api` 去掉
+        // rewrite: path => path.replace(/^\/api/, 'api/'), // 将路径中的 `/api` 去掉
       }
     }
   }

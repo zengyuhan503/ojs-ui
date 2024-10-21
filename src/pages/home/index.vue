@@ -4,7 +4,7 @@ import Banner from "@comments/banner.vue";
 // import HomeVideo from '@comments/homeVideo.vue';
 import UseCookieBanners from "@comments/cookieBanner.vue";
 import moment from "moment";
-import { homeConfig, news, banners, token, home_journals } from "../../api/list.js";
+import { homeConfig, news, banners, home_journals, HomeLinks } from "../../api/list.js";
 const videoElement = ref(null);
 const homeInfo = ref({
   plate_one_desc: "",
@@ -16,51 +16,20 @@ const homeInfo = ref({
   plate_four_list: [],
 });
 const journalItemActive = ref(1);
-const journalsItems = ref([
-  {
-    name: "BIOSIS",
-    content: `
-          5  Biological Systems is an international fully peer-reviewed and
-            Committee on Publication Ethics (COPE) compliant open access Journal that is published
-            online with a quarterly frequency. The goal of this journal...
-        `,
-  },
-  {
-    name: "NANOFABRICATION",
-    content: `
-          4  Biological Systems is an international fully peer-reviewed and
-            Committee on Publication Ethics (COPE) compliant open access Journal that is published
-            online with a quarterly frequency. The goal of this journal...
-        `,
-  },
-  {
-    name: "IJS",
-    content: `
-          3  Biological Systems is an international fully peer-reviewed and
-            Committee on Publication Ethics (COPE) compliant open access Journal that is published
-            online with a quarterly frequency. The goal of this journal...
-        `,
-  },
-  {
-    name: "BPH",
-    content: `
-          2  Biological Systems is an international fully peer-reviewed and
-            Committee on Publication Ethics (COPE) compliant open access Journal that is published
-            online with a quarterly frequency. The goal of this journal...
-        `,
-  },
-  {
-    name: "Human Brain",
-    content: `
-           1 Biological Systems is an international fully peer-reviewed and
-            Committee on Publication Ethics (COPE) compliant open access Journal that is published
-            online with a quarterly frequency. The goal of this journal...
-        `,
-  },
-]);
-const hoverItem = (index) => {
-  if (index == journalItemActive.value) return false;
-  journalItemActive.value = index;
+const journalsItems = ref([]);
+let journalsItem = ref({});
+const hoverItem = (item) => {
+  console.log(item);
+  journalItemActive.value = item.id;
+  let params = {
+    id: item.id,
+  };
+  home_journals
+    .artList(params)
+    .then((res) => {
+      journalsItem.value = res.data.data;
+    })
+    .catch((err) => {});
 };
 
 const cookiesRef = ref(null);
@@ -73,23 +42,33 @@ const showCookieBanners = ref(false);
 let new_list = ref([]);
 const getNews = () => {
   news.list().then((res) => {
-    let data = res.data;
+    let data = res.data.data;
+    if (data == null) return false;
     data.forEach((item) => {
       item.data_str = moment(item.modified).format("MMMM D, YYYY");
     });
-    console.log(data);
     new_list.value = data;
   });
 };
 
 let journal_cates = ref([]);
+
 const getJournalCates = () => {
   home_journals.cates().then((res) => {
     journal_cates.value = res.data.data;
-    console.log(res);
+    hoverItem(journal_cates.value[0]);
   });
 };
 
+let linkList = ref([]);
+const getHomeLinks = () => {
+  HomeLinks.list().then((res) => {
+    linkList.value = res.data.data;
+    linkList.value.forEach((item) => {
+      item.cover_image = "https://ojs.cdwuhu.com/" + item.cover_image;
+    });
+  });
+};
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -100,18 +79,17 @@ onMounted(() => {
     });
   });
   let isUseCookies = localStorage.getItem("isUseCookies");
-  console.log(isUseCookies);
   if (!isUseCookies || isUseCookies == null) {
     showCookieBanners.value = true;
   }
   homeConfig.info().then((res) => {
-    console.log(res);
     let data = res.data;
     if (data.code == 0) {
       homeInfo.value = data.data;
     }
   });
   getNews();
+  getHomeLinks();
   getJournalCates();
 });
 </script>
@@ -155,9 +133,9 @@ onMounted(() => {
           <p class="title">Our <span>Journals</span></p>
           <div class="btns">
             <div
-              :class="{ active: journalItemActive === i }"
-              @mouseover="hoverItem(i)"
-              v-for="(item, i) in journalsItems"
+              :class="{ active: journalItemActive === item.id }"
+              @mouseover="hoverItem(item, index)"
+              v-for="(item, i) in journal_cates"
               :key="i"
             >
               {{ item.name }}
@@ -167,11 +145,10 @@ onMounted(() => {
         <div class="main">
           <div class="info">
             <p class="title">
-              {{ journalsItems[journalItemActive].name }}
+              <!-- {{ journalsItems[journalItemActive].path }} -->
+              {{ journalsItem.enname }}
             </p>
-            <p class="desc">
-              {{ journalsItems[journalItemActive].content }}
-            </p>
+            <div v-html="journalsItem.dsp"></div>
             <div class="btns">
               <a href="">View Journal</a>
               <a href="">Current Issue</a>
@@ -277,7 +254,12 @@ onMounted(() => {
     </div>
     <div class="home-imgs">
       <div class="imgs">
-        <img src="../../assets/image/home-imgs.png" alt="" />
+        <img
+          :src="item.cover_image"
+          v-for="(item, index) in linkList"
+          :key="index"
+          alt=""
+        />
       </div>
     </div>
   </div>
