@@ -105,25 +105,47 @@ onMounted(() => {
         <div class="btns">Read More</div>
       </div>
     </div>
+
     <div class="home-mission">
       <div>
         <div class="left-text">
           <p class="title">Our <span>Mission</span></p>
-          <p class="desc">{{ homeInfo.plate_two_desc }}</p>
+          <p class="desc">
+            EurAsia Academic Publishing Group helps researchers to inspire a global
+            community. We are dedicated to providing a platform for scholars to share
+            their groundbreaking research and insights with a wider audience. Our team
+            works diligently to ensure that each publication meets the highest academic
+            standards, promoting the dissemination of knowledge across various fields. By
+            fostering collaboration among researchers, we aim to create a vibrant network
+            that encourages innovation and scholarly exchange. Our commitment to quality
+            and accessibility ensures that important findings reach those who need them
+            most. Join us in our mission to empower researchers and cultivate a thriving
+            academic community worldwide.
+          </p>
         </div>
         <div class="right-img">
-          <img :src="homeInfo.plate_two_image" alt="" />
+          <img src="../../assets/image/mission.jpg" alt="" />
         </div>
       </div>
     </div>
     <div class="home-mission home-vision">
       <div>
         <div class="right-img">
-          <img :src="homeInfo.plate_three_image" alt="" />
+          <img src="../../assets/image/mission2.jpg" alt="" />
         </div>
         <div class="left-text">
           <p class="title">Our <span>Vision</span></p>
-          <p class="desc">{{ homeInfo.plate_three_desc }}</p>
+          <p class="desc">
+            All researchers have the opportunity to realize their full potential and
+            transform their societies. At EurAsia Academic Publishing Group, we believe
+            that every study has the power to spark change and drive progress. Our
+            platform provides researchers with the resources, support, and visibility they
+            need to share their findings effectively. By connecting with a global
+            audience, researchers can inspire new ideas and solutions that address
+            pressing challenges. We are committed to fostering an environment where
+            innovation thrives and diverse perspectives are valued. Together, we can build
+            a brighter future through the power of research and collaboration.
+          </p>
         </div>
       </div>
     </div>
@@ -145,7 +167,6 @@ onMounted(() => {
         <div class="main">
           <div class="info">
             <p class="title">
-              <!-- {{ journalsItems[journalItemActive].path }} -->
               {{ journalsItem.enname }}
             </p>
             <div v-html="journalsItem.dsp"></div>
