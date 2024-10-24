@@ -3,7 +3,7 @@ axios.defaults.headers={
     'Content-Type': 'application/x-www-form-urlencoded'
 }
 // let get =
-// axios.defaults.baseURL = "https://ojs.cdwuhu.com/"
+axios.defaults.baseURL = "https://ojs.cdwuhu.com/"
 
 let tokens = localStorage.getItem('tokne');
 export const banners = {
@@ -30,4 +30,10 @@ export const token = {
 export const home_journals = {
     cates: () => axios.get("/api/index/getJtitle"),
     artList: (params) => axios.post("/api/index/getJournal", params)
+}
+
+export const user={
+    register:params=>axios.post("/api/user/register",params),
+    login:params=>axios.post("/api/user/login",params),
+    code:(params)=>axios.post('/api/ems/send',params)
 }

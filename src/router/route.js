@@ -6,8 +6,14 @@ import JournalMain from '../pages/journals/journal_main.vue'
 import ArticleShowing from '../pages/journals/articleShowing.vue'
 import ArticleShowing_bf from '../pages/journals/articleShowing2.vue'
 
+
+import Sign from '../pages/login/sign.vue'
+import Register from '../pages/login/register.vue'
+
 const routes = [
     { path: '/', name: "Home", component: HomeView },
+    { path: '/login', name: "Sign", component: Sign },
+    { path: '/register', name: "Register", component: Register },
     { path: '/journals', name: "journals", component: JournalsView },
     { path: '/journalsInfo', name: "journalsInfo", component: JournalsInfo },
     { path: '/archives', name: "archives", component: ArchivesView },
