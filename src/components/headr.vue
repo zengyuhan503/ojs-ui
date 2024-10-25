@@ -154,7 +154,7 @@ onUnmounted(() => {
                     @click="toJournal(item)"
                     :key="index"
                   >
-                    {{ item.name }}
+                    {{ item.path }}
                   </a-doption>
                 </template>
               </a-dropdown>

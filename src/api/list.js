@@ -28,8 +28,8 @@ export const token = {
     token: (params) => axios.post("/wp-json/api/v1/token", params)
 }
 export const home_journals = {
-    cates: () => axios.get("/api/index/getJtitle"),
-    artList: (params) => axios.post("/api/index/getJournal", params)
+    cates: (params) => axios.get("/api/index/getJtitle",params),
+    artList: (params) => axios.post("/api/index/getjournal", params)
 }
 
 export const user={

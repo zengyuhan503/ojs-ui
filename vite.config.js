@@ -39,7 +39,7 @@ export default defineConfig({
       '/api': {
         target: 'https://ojs.cdwuhu.com/', // 目标服务器
         changeOrigin: true, // 是否改变请求源，这是跨域的关键
-        // rewrite: path => path.replace(/^\/api/, 'api/'), // 将路径中的 `/api` 去掉
+        rewrite: path => path.replace(/^\/api/, 'api/'), // 将路径中的 `/api` 去掉
       }
     }
   }

@@ -20,14 +20,15 @@ const journalsItems = ref([]);
 let journalsItem = ref({});
 const hoverItem = (item) => {
   console.log(item);
-  journalItemActive.value = item.id;
+  journalItemActive.value = item.journal_id;
   let params = {
-    id: item.id,
+    id: item.journal_id,
   };
   home_journals
     .artList(params)
     .then((res) => {
-      journalsItem.value = res.data.data;
+      journalsItem.value = res.data.data[0].article;
+      console.log(journalsItem.value)
     })
     .catch((err) => {});
 };
@@ -55,7 +56,7 @@ let journal_cates = ref([]);
 
 const getJournalCates = () => {
   home_journals.cates().then((res) => {
-    journal_cates.value = res.data.data;
+    journal_cates.value = res.data.data.splice(1,4);
     hoverItem(journal_cates.value[0]);
   });
 };
@@ -172,21 +173,21 @@ onMounted(() => {
           <p class="title">Our <span>Journals</span></p>
           <div class="btns">
             <div
-              :class="{ active: journalItemActive === item.id }"
+              :class="{ active: journalItemActive === item.journal_id }"
               @mouseover="hoverItem(item, index)"
               v-for="(item, i) in journal_cates"
               :key="i"
             >
-              {{ item.name }}
+              {{ item.path.toUpperCase() }}
             </div>
           </div>
         </div>
         <div class="main">
           <div class="info">
             <p class="title">
-              {{ journalsItem.enname }}
+              {{ journalsItem.title }}
             </p>
-            <div v-html="journalsItem.dsp"></div>
+            <div class="desc" v-html="journalsItem.citationsRaw"></div>
             <div class="btns">
               <a href="">View Journal</a>
               <a href="">Current Issue</a>
