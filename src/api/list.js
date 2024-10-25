@@ -29,7 +29,8 @@ export const token = {
 }
 export const home_journals = {
     cates: (params) => axios.get("/api/index/getJtitle",params),
-    artList: (params) => axios.post("/api/index/getjournal", params)
+    artList: (params) => axios.post("/api/index/getjournal", params),
+    jinfo:params=>axios.post('/api/index/oneJournal',params)
 }
 
 export const user={

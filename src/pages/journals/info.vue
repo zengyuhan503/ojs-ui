@@ -5,18 +5,29 @@ import moment from "moment";
 import { useRouter, useRoute } from "vue-router";
 let useroute = useRoute();
 let j_id = useroute.query.id;
-let j_info = ref({});
-const getInfo = () => {
+let j_list = ref([]);
+let j_info =ref({})
+const getList = () => {
   let params = {
     id: j_id,
+    pagesize:1000
   };
   home_journals.artList(params).then((res) => {
-    // console.log(res);
-    j_info.value = res.data.data;
+    console.log(res);
+    j_list.value=res.data.data;
   });
 };
+const getInfo=()=>{
+  let params={
+    id:j_id
+  }
+  home_journals.jinfo(params).then(res=>{
+    j_info.value=res.data.data
+  })
+}
 onMounted(() => {
   // console.log(useroute);
+  getList();
   getInfo();
 });
 </script>
@@ -38,127 +49,31 @@ onMounted(() => {
                 <a href="">Latest Articles</a>
               </p>
               <div class="items">
-                <a-row :gutter="20">
-                  <a-col :span="12">
+                <a-row :gutter="20" v-if="j_list.length>0">
+                  <a-col :span="12" v-for="(item, index) in j_list" :key="index">
                     <div class="item">
                       <p class="label">Review Article</p>
                       <p class="title">
-                        Photocatalytic efficiency of green synthesized ZnO nanoparticles
-                        for the degradation of methyl orange dye: A review
+                       {{ item.article.title }}
                       </p>
-                      <p class="desc">
-                        Naveen Thakur, Nikesh Thakur, Kuldeep Kumar, Vedpriya Arya,
-                        Ashwani Kumar, Susheel Kalia
+                      <p class="desc" v-html="item.article.abstract">
                       </p>
                       <div class="datas">
                         <img src="../../assets/image/calendar.png" alt="" />
-                        <span>20-11-2022</span>
+                        <span>{{ item.date_published }}</span>
                         <a-divider direction="vertical" />
                         <img src="../../assets/image/eye.png" alt="" />
-                        <span>196</span>
+                        <span>{{ item.primary_contact_id }}</span>
                         <a-divider direction="vertical" />
                         <img src="../../assets/image/dow.png" alt="" />
-                        <span>2248 Downloads</span>
+                        <span>{{ item.seq }} Downloads</span>
                       </div>
                       <div class="btns">
-                        <a href="">
+                        <a :href="item.link">
                           <img src="../../assets/image/text.png" alt="" /> Abstract</a
                         >
-                        <a href="">
-                          <img src="../../assets/image/file-pdf.png" alt="" /> PDF</a
-                        >
-                      </div>
-                    </div>
-                  </a-col>
-                  <a-col :span="12">
-                    <div class="item">
-                      <p class="label">Review Article</p>
-                      <p class="title">
-                        Photocatalytic efficiency of green synthesized ZnO nanoparticles
-                        for the degradation of methyl orange dye: A review
-                      </p>
-                      <p class="desc">
-                        Naveen Thakur, Nikesh Thakur, Kuldeep Kumar, Vedpriya Arya,
-                        Ashwani Kumar, Susheel Kalia
-                      </p>
-                      <div class="datas">
-                        <img src="../../assets/image/calendar.png" alt="" />
-                        <span>20-11-2022</span>
-                        <a-divider direction="vertical" />
-                        <img src="../../assets/image/eye.png" alt="" />
-                        <span>196</span>
-                        <a-divider direction="vertical" />
-                        <img src="../../assets/image/dow.png" alt="" />
-                        <span>2248 Downloads</span>
-                      </div>
-                      <div class="btns">
-                        <a href="">
-                          <img src="../../assets/image/text.png" alt="" /> Abstract</a
-                        >
-                        <a href="">
-                          <img src="../../assets/image/file-pdf.png" alt="" /> PDF</a
-                        >
-                      </div>
-                    </div>
-                  </a-col>
-                  <a-col :span="12">
-                    <div class="item">
-                      <p class="label">Review Article</p>
-                      <p class="title">
-                        Photocatalytic efficiency of green synthesized ZnO nanoparticles
-                        for the degradation of methyl orange dye: A review
-                      </p>
-                      <p class="desc">
-                        Naveen Thakur, Nikesh Thakur, Kuldeep Kumar, Vedpriya Arya,
-                        Ashwani Kumar, Susheel Kalia
-                      </p>
-                      <div class="datas">
-                        <img src="../../assets/image/calendar.png" alt="" />
-                        <span>20-11-2022</span>
-                        <a-divider direction="vertical" />
-                        <img src="../../assets/image/eye.png" alt="" />
-                        <span>196</span>
-                        <a-divider direction="vertical" />
-                        <img src="../../assets/image/dow.png" alt="" />
-                        <span>2248 Downloads</span>
-                      </div>
-                      <div class="btns">
-                        <a href="">
-                          <img src="../../assets/image/text.png" alt="" /> Abstract</a
-                        >
-                        <a href="">
-                          <img src="../../assets/image/file-pdf.png" alt="" /> PDF</a
-                        >
-                      </div>
-                    </div>
-                  </a-col>
-                  <a-col :span="12">
-                    <div class="item">
-                      <p class="label">Review Article</p>
-                      <p class="title">
-                        Photocatalytic efficiency of green synthesized ZnO nanoparticles
-                        for the degradation of methyl orange dye: A review
-                      </p>
-                      <p class="desc">
-                        Naveen Thakur, Nikesh Thakur, Kuldeep Kumar, Vedpriya Arya,
-                        Ashwani Kumar, Susheel Kalia
-                      </p>
-                      <div class="datas">
-                        <img src="../../assets/image/calendar.png" alt="" />
-                        <span>20-11-2022</span>
-                        <a-divider direction="vertical" />
-                        <img src="../../assets/image/eye.png" alt="" />
-                        <span>196</span>
-                        <a-divider direction="vertical" />
-                        <img src="../../assets/image/dow.png" alt="" />
-                        <span>2248 Downloads</span>
-                      </div>
-                      <div class="btns">
-                        <a href="">
-                          <img src="../../assets/image/text.png" alt="" /> Abstract</a
-                        >
-                        <a href="">
-                          <img src="../../assets/image/file-pdf.png" alt="" /> PDF</a
+                        <a :href="item.link">
+                          <img src="../../assets/image/file-pdf.png"  alt="" /> PDF</a
                         >
                       </div>
                     </div>
@@ -167,7 +82,7 @@ onMounted(() => {
               </div>
             </div>
 
-            <div class="issues">
+            <div class="issues" v-if="false">
               <p class="title">
                 <a href="">Recemt <span>Issues</span></a>
               </p>
@@ -312,6 +227,7 @@ onMounted(() => {
         margin-top: 14px;
 
         .item {
+          cursor: pointer;
           padding: 20px;
           border: 1px solid #ececece5;
           background: #fff;

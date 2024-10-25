@@ -2,7 +2,10 @@
 import Banner from "./banner.vue";
 import { homeConfig, news, banners, home_journals, HomeLinks } from "../../api/list.js";
 import { onMounted, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
 
+const router = useRouter();
+const route = useRoute();
 let journal_cates = ref([]);
 const getJournalCates = () => {
   let params = {
@@ -12,6 +15,14 @@ const getJournalCates = () => {
     journal_cates.value = res.data.data;
   });
 };
+const toJournalInfo=(item)=>{
+    router.push({
+        path:"/journalsInfo",
+        query:{
+            id:item.journal_id
+        }
+    })
+}
 onMounted(() => {
   getJournalCates();
 });
@@ -34,32 +45,17 @@ onMounted(() => {
           </p>
           <div class="list">
             <a-row class="grid-demo" :gutter="20">
-              <a-col :span="24">
+              <a-col :span="24" v-for="(item, index) in journal_cates" :key="index" @click="toJournalInfo(item)">
                 <div class="item">
                   <a-row :gutter="50">
                     <a-col :span="6">
                       <img src="../../assets/image/journals-list-img.png" alt="" />
                     </a-col>
                     <a-col :span="18">
-                      <p class="title">Our <span> Title </span></p>
-                      <p class="desc">
-                        EurAsia Academic Publishing Group (EAPG) is an independent
-                        International publisher that <br />
-                        publishes online, <br />
-                        peer-reviewed journals covering a wide range of academic
-                        disciplines. EAPG follows strict publication ethics <br />
-                        published by COPE. All the articles published under the EAPG
-                        provide copyrights to the author providing<br />
-                        EurAsia Academic Publishing Group (EAPG) is an independent
-                        International publisher that <br />
-                        publishes online, <br />
-                        peer-reviewed journals covering a wide range of academic
-                        disciplines. EAPG follows strict publication ethics <br />
-                        published by COPE. All the articles published under the EAPG
-                        provide copyrights to the author providing<br />
-                      </p>
+                      <p class="title">{{ item.abbreviation }}</p>
+                      <p class="desc" v-html="item.description"></p>
 
-                      <div class="datas">
+                      <!-- <div class="datas">
                         <img src="../../assets/image/calendar.png" alt="" />
                         <span>20-11-2022</span>
                         <a-divider direction="vertical" />
@@ -68,7 +64,7 @@ onMounted(() => {
                         <a-divider direction="vertical" />
                         <img src="../../assets/image/dow.png" alt="" />
                         <span>2248 Downloads</span>
-                      </div>
+                      </div> -->
                     </a-col>
                   </a-row>
                 </div>
